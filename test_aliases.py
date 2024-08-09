@@ -1,7 +1,7 @@
 '''
-Цей скрипт порівнює два файла з аліасами.
-Він знаходить які адреси аліасів присутні в другому файлі,але відсутні в першому.
-Потім він створює новий файл "new_aliases.xml", який копіює перший файл та додає відсутні адреси з другого.
+This script compares two files with aliases.
+It finds which alias addresses are present in the second file, but absent in the first.
+It then creates a new file "new_aliases.xml" that copies the first file and adds the missing addresses from the second.
 '''
 
 import xml.etree.ElementTree as ET
@@ -42,7 +42,7 @@ def merge_addresses(list_a, list_b):
     merged_addresses = addresses_a.union(addresses_b)
     return ' '.join(sorted(merged_addresses))
 
-#Файли, які порівнюються(скріпт знаходить які адреси аліасів присутні в другому файлі,але відсутні в першому)
+#Files that are compared (the script finds which alias addresses are present in the second file, but not in the first).
 desktop_path = os.path.join(os.path.expanduser("~"), "Desktop")
 file_names = ["test-aliases-main.xml", "test-aliases-motovylivka.xml"]
 
@@ -86,7 +86,7 @@ for alias in root.findall(".//alias"):
         new_address = ET.SubElement(alias, "address")
         new_address.text = first_file_aliases[name.text][0]
 
-#Назва нового файлу
+#The name of the new file.
 new_file_path = os.path.join(desktop_path, "new_aliases.xml")
 first_tree.write(new_file_path, encoding="utf-8", xml_declaration=True)
 
